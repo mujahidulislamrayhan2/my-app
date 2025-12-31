@@ -1,4 +1,142 @@
+
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greeting App</title>
+
+    <style>
+        /* 🔄 Reset & Center */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #0f172a;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* 🎯 Container */
+        #greeting-container {
+            position: relative;
+            overflow: hidden;
+            height: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 24px;
+            text-align: center;
+        }
+
+        /* ✨ Text */
+        #greeting-text {
+            color: #38bdf8;
+            font-size: 4rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+
+            transform: translateX(100%);
+            opacity: 0;
+
+            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                        opacity 0.5s ease;
+        }
+
+        #greeting-text.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        /* ℹ️ Hint */
+        #hint {
+            position: absolute;
+            bottom: 20px;
+            color: #64748b;
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 0 16px;
+        }
+
+        /* 📱 Mobile Responsive */
+        @media (max-width: 768px) {
+            #greeting-text {
+                font-size: 2.2rem;
+                letter-spacing: 1px;
+                line-height: 1.3;
+                transform: translateX(120%);
+            }
+
+            #hint {
+                font-size: 0.75rem;
+                bottom: 12px;
+            }
+        }
+
+        /* 📱 Extra Small Phones */
+        @media (max-width: 400px) {
+            #greeting-text {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* ♿ Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            #greeting-text {
+                transition: none;
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="greeting-container" tabindex="0">
+        <h1 id="greeting-text">🤡 কিরে বোকাচোদা 🤡</h1>
+    </div>
+
+    <div id="hint">এপ্লাই করতে ক্লিক করুন</div>
+
+    <script>
+        function toggleText() {
+            const text = document.getElementById('greeting-text');
+            const hint = document.getElementById('hint');
+
+            text.classList.toggle('show');
+            hint.textContent = text.classList.contains('show')
+                ? 'আবার লুকাতে ক্লিক করুন'
+                : 'এপ্লাই করতে ক্লিক করুন';
+        }
+
+        document.body.addEventListener("click", toggleText);
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                toggleText();
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -74,4 +212,4 @@
         }
     </script>
 </body>
-</html>
+</html> -->
