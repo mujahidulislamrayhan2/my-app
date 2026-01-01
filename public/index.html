@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Click Anywhere Toggle</title>
+<title>Click Anywhere Show Once</title>
 
 <style>
     * {
@@ -24,7 +24,6 @@
 
     .screen {
         text-align: center;
-        cursor: pointer;
         user-select: none;
         width: 100%;
     }
@@ -37,6 +36,7 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         animation: pulse 1.5s infinite;
+        cursor: pointer;
     }
 
     @keyframes pulse {
@@ -48,6 +48,7 @@
     /* 🎉 Greeting Screen */
     #content {
         display: none;
+        cursor: default;
     }
 
     .greeting-text {
@@ -112,21 +113,15 @@
 </div>
 
 <script>
-    let showingStart = true;
+    let shown = false;
 
     document.body.addEventListener("click", () => {
-        const start = document.getElementById("start");
-        const content = document.getElementById("content");
+        if (shown) return;
 
-        if (showingStart) {
-            start.style.display = "none";
-            content.style.display = "block";
-        } else {
-            content.style.display = "none";
-            start.style.display = "block";
-        }
+        document.getElementById("start").style.display = "none";
+        document.getElementById("content").style.display = "block";
 
-        showingStart = !showingStart;
+        shown = true; // 👈 one-way only
     });
 </script>
 
