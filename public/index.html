@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Simple Click Site</title>
+<title>Click Anywhere Toggle</title>
 
 <style>
     * {
@@ -22,16 +22,21 @@
         padding: 20px;
     }
 
+    .screen {
+        text-align: center;
+        cursor: pointer;
+        user-select: none;
+        width: 100%;
+    }
+
     /* 🔰 First Screen */
     #start {
-        text-align: center;
+        font-size: 2.2rem;
         font-weight: bold;
-        cursor: pointer;
         background: linear-gradient(90deg, #38bdf8, #a78bfa, #f472b6);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         animation: pulse 1.5s infinite;
-        user-select: none;
     }
 
     @keyframes pulse {
@@ -40,17 +45,16 @@
         100% { transform: scale(1); opacity: 0.7; }
     }
 
-    /* 🎉 Content */
+    /* 🎉 Greeting Screen */
     #content {
         display: none;
-        text-align: center;
-        max-width: 100%;
     }
 
     .greeting-text {
         color: #38bdf8;
+        font-size: 1.9rem;
         font-weight: bold;
-        margin-bottom: 16px;
+        margin-bottom: 14px;
         word-wrap: break-word;
     }
 
@@ -66,60 +70,35 @@
 
     .greeting-subtext {
         color: #94a3b8;
+        font-size: 0.95rem;
         line-height: 1.6;
         padding: 0 10px;
     }
 
-    /* 📱 Mobile First */
-    #start {
-        font-size: 2.2rem;
-    }
-
-    .greeting-text {
-        font-size: 1.9rem;
-    }
-
-    .greeting-subtext {
-        font-size: 0.95rem;
-    }
-
-    /* 📱 Medium Screens */
+    /* 📱 Responsive */
     @media (min-width: 480px) {
-        #start {
-            font-size: 2.8rem;
-        }
-
-        .greeting-text {
-            font-size: 2.4rem;
-        }
-
-        .greeting-subtext {
-            font-size: 1.05rem;
-        }
+        #start { font-size: 2.8rem; }
+        .greeting-text { font-size: 2.4rem; }
+        .greeting-subtext { font-size: 1.05rem; }
     }
 
-    /* 💻 Large Screens */
     @media (min-width: 768px) {
-        #start {
-            font-size: 3.5rem;
-        }
-
-        .greeting-text {
-            font-size: 3rem;
-        }
-
-        .greeting-subtext {
-            font-size: 1.15rem;
-        }
+        #start { font-size: 3.5rem; }
+        .greeting-text { font-size: 3rem; }
+        .greeting-subtext { font-size: 1.15rem; }
     }
 </style>
 </head>
 
 <body>
 
-<div id="start">দেখতে ক্লিক করুন</div>
+<!-- 🔰 First Screen -->
+<div id="start" class="screen">
+    দেখতে ক্লিক করুন
+</div>
 
-<div id="content">
+<!-- 🎉 Second Screen -->
+<div id="content" class="screen">
     <h1 class="greeting-text">
         <span class="emoji">🤡</span>
         কিরে বোকাচোদা
@@ -133,12 +112,21 @@
 </div>
 
 <script>
-    const start = document.getElementById("start");
-    const content = document.getElementById("content");
+    let showingStart = true;
 
-    start.addEventListener("click", () => {
-        start.style.display = "none";
-        content.style.display = "block";
+    document.body.addEventListener("click", () => {
+        const start = document.getElementById("start");
+        const content = document.getElementById("content");
+
+        if (showingStart) {
+            start.style.display = "none";
+            content.style.display = "block";
+        } else {
+            content.style.display = "none";
+            start.style.display = "block";
+        }
+
+        showingStart = !showingStart;
     });
 </script>
 
